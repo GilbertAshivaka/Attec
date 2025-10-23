@@ -1,0 +1,151 @@
+.about {
+  padding: 6rem 2rem;
+  background-color: white;
+}
+
+.about-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.about-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.about-acronym {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.about-acronym strong {
+  color: #111827;
+  font-weight: 700;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-mission {
+  background: #f9fafb;
+  padding: 3rem;
+  border-radius: 1rem;
+}
+
+.about-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.about-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.about-location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.about-mission h3 {
+  font-size: 1.5rem;
+  color: #111827;
+  margin: 2rem 0 1rem 0;
+}
+
+.about-mission h3:first-of-type {
+  margin-top: 0;
+}
+
+.about-mission p {
+  color: #4b5563;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.about-values {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about-value-card {
+  background: white;
+  border: 2px solid #e5e7eb;
+  padding: 2rem;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.about-value-card:hover {
+  border-color: #111827;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.about-value-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #111827 0%, #374151 100%);
+  color: white;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.about-value-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.about-value-card h4 {
+  font-size: 1.25rem;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+.about-value-card p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+@media (max-width: 968px) {
+  .about {
+    padding: 4rem 1.5rem;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-mission {
+    padding: 2rem;
+  }
+
+  .about-logo-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

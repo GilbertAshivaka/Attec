@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Lead from ATTEC Website</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #111827;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9fafb;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            border-bottom: 3px solid #111827;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #111827;
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .lead-info {
+            background-color: #f9fafb;
+            border-left: 4px solid #111827;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .info-row {
+            margin: 10px 0;
+        }
+        .label {
+            font-weight: 600;
+            color: #374151;
+            display: inline-block;
+            width: 100px;
+        }
+        .value {
+            color: #111827;
+        }
+        .message-box {
+            background-color: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .message-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 10px;
+        }
+        .message-content {
+            color: #4b5563;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 12px;
+            color: #6b7280;
+            text-align: center;
+        }
+        .submission-id {
+            font-size: 11px;
+            color: #9ca3af;
+            font-family: monospace;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #111827;
+            color: #ffffff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 New Lead from ATTEC Website</h1>
+        </div>
+        
+        <p>You have received a new contact form submission from your website.</p>
+        
+        <div class="lead-info">
+            <div class="info-row">
+                <span class="label">Name:</span>
+                <span class="value">{{ contact_name }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Email:</span>
+                <span class="value"><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Company:</span>
+                <span class="value">{{ contact_company }}</span>
+            </div>
+        </div>
+        
+        <div class="message-box">
+            <div class="message-label">Message:</div>
+            <div class="message-content">{{ contact_message }}</div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="mailto:{{ contact_email }}" class="cta-button">Reply to {{ contact_name }}</a>
+        </div>
+        
+        <div class="footer">
+            <p>This lead was submitted through attec.co.ke</p>
+            <p class="submission-id">Submission ID: {{ submission_id }}</p>
+        </div>
+    </div>
+</body>
+</html>
