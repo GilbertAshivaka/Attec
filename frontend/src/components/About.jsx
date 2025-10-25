@@ -51,7 +51,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="about-logo-section">
-              <img src="/logo.jpg" alt="ATTEC Logo" className="about-logo" />
+              <img src="/logo.png" alt="ATTEC Logo" className="about-logo" />
               <div className="about-logo-text">
                 <p className="about-location">
                   <MapPin size={20} />

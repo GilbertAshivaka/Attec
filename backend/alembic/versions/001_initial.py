@@ -23,11 +23,23 @@ def upgrade() -> None:
     is_postgres = bind.dialect.name == 'postgresql'
     
     if is_postgres:
-        # Create enum types for PostgreSQL
-        op.execute("CREATE TYPE userrole AS ENUM ('admin', 'editor', 'viewer')")
-        op.execute("CREATE TYPE contactstatus AS ENUM ('new', 'contacted', 'qualified', 'converted', 'archived')")
-        role_type = postgresql.ENUM('admin', 'editor', 'viewer', name='userrole')
-        status_type = postgresql.ENUM('new', 'contacted', 'qualified', 'converted', 'archived', name='contactstatus')
+        # Check and create enum types for PostgreSQL only if they don't exist
+        op.execute("""
+            DO $$ BEGIN
+                CREATE TYPE userrole AS ENUM ('admin', 'editor', 'viewer');
+            EXCEPTION
+                WHEN duplicate_object THEN null;
+            END $$;
+        """)
+        op.execute("""
+            DO $$ BEGIN
+                CREATE TYPE contactstatus AS ENUM ('new', 'contacted', 'qualified', 'converted', 'archived');
+            EXCEPTION
+                WHEN duplicate_object THEN null;
+            END $$;
+        """)
+        role_type = postgresql.ENUM('admin', 'editor', 'viewer', name='userrole', create_type=False)
+        status_type = postgresql.ENUM('new', 'contacted', 'qualified', 'converted', 'archived', name='contactstatus', create_type=False)
         id_type = postgresql.UUID(as_uuid=True)
         json_type = postgresql.JSON()
         timestamp_default = sa.text('now()')

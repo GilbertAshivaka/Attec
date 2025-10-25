@@ -22,7 +22,7 @@ class ContactSubmission(Base):
     email = Column(String, nullable=False, index=True)
     company = Column(String, nullable=True)
     message = Column(Text, nullable=False)
-    status = Column(Enum(ContactStatus), default=ContactStatus.NEW, nullable=False)
+    status = Column(Enum(ContactStatus, values_callable=lambda obj: [e.value for e in obj]), default=ContactStatus.NEW, nullable=False)
     ip_address = Column(String, nullable=True)
     user_agent = Column(String, nullable=True)
     assigned_to = Column(String, nullable=True)

@@ -19,7 +19,7 @@ class User(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     password = Column(String, nullable=False)
     name = Column(String, nullable=False)
-    role = Column(Enum(UserRole), default=UserRole.VIEWER, nullable=False)
+    role = Column(Enum(UserRole, values_callable=lambda obj: [e.value for e in obj]), default=UserRole.VIEWER, nullable=False)
     active = Column(Boolean, default=True, nullable=False)
     last_login = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
