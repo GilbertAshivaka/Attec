@@ -33,29 +33,34 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Log CORS configuration
+logger.info(f"Environment: {settings.ENVIRONMENT}")
 logger.info(f"Configured ALLOWED_ORIGINS: {settings.ALLOWED_ORIGINS}")
-logger.info(f"ALLOWED_ORIGINS type: {type(settings.ALLOWED_ORIGINS)}")
 
-# Configure CORS - Allow all origins in development
+# Configure CORS - Allow configured origins
+# Parse ALLOWED_ORIGINS from comma-separated string if needed
+if isinstance(settings.ALLOWED_ORIGINS, str):
+    origins_list = [origin.strip() for origin in settings.ALLOWED_ORIGINS.split(',') if origin.strip()]
+else:
+    origins_list = settings.ALLOWED_ORIGINS
+
+# In development, allow all origins for easier testing
 if settings.ENVIRONMENT == "development":
     logger.warning("Development mode: Allowing all origins for CORS")
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=False,  # Must be False when allow_origins is ["*"]
-        allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-        allow_headers=["*"],
-        expose_headers=["*"],
-    )
+    origins_list = ["*"]
+    allow_credentials = False
 else:
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=settings.ALLOWED_ORIGINS,
-        allow_credentials=True,
-        allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-        allow_headers=["*"],
-        expose_headers=["*"],
-    )
+    logger.info(f"Production mode: Allowing origins: {origins_list}")
+    allow_credentials = True
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins_list,
+    allow_credentials=allow_credentials,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,  # Cache preflight requests for 1 hour
+)
 
 
 # Request timing middleware
